@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
+using Model.Database;
 
 namespace View
 {
@@ -20,9 +22,29 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
+        ViewModel viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = viewModel;
+
+            InitData();
         }
+
+        private void InitData() {
+
+            viewModel = new ViewModel();
+
+            Connection connection = null;
+            if (!HelperDatabase.ConnectionToDataBase(ref connection))
+            {
+                MessageBox.Show("I can't connect to database");
+            }
+
+
+        }
+
+        
     }
 }

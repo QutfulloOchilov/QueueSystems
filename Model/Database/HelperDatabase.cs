@@ -39,5 +39,7 @@ namespace Model.Database
 
             return result;
         }
+
+        public static User CheckCredentials(string login, string password, Connection connection) => connection.Table<User>().FirstOrDefault(u => u.Login == login && u.Password == password);
     }
 }

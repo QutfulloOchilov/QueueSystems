@@ -6,17 +6,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.Database
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        public ViewModel() {
+
+        }
+
+        #region Filds
+
         private User currentUser;
+        private Connection currentConnection;
+
+        #endregion
+
+        #region Properties
 
         public User CurrentUser
         {
             get { return currentUser; }
             set { currentUser = value; NotifyPropertyChanged(); }
         }
+
+
+        public Connection CurrentConnection
+        {
+            get { return currentConnection; }
+            set { currentConnection = value; }
+        }
+
+        #endregion
+
+
 
 
 
