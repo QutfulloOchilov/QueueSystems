@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.Entity
+namespace QueuSystems.Model
 {
     [Table(nameof(TurnSystem))]
     public class TurnSystem

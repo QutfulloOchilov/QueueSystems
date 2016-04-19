@@ -1,5 +1,8 @@
-﻿using System;
+﻿using QueuSystems.ViewModel;
+using SQLite.Net.Platform.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,39 +15,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Model;
-using Model.Database;
 
-namespace View
+namespace Windows.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow 
     {
         ViewModel viewModel;
-
+        String databasePath = "Database.db";
         public MainWindow()
         {
+            SQLitePlatformWin32 litePlatform = new SQLitePlatformWin32();
+            viewModel = new ViewModel(litePlatform, databasePath, File.Exists(databasePath));
             InitializeComponent();
-            this.DataContext = viewModel;
-
-            InitData();
-        }
-
-        private void InitData() {
-
-            viewModel = new ViewModel();
-
-            Connection connection = null;
-            if (!HelperDatabase.ConnectionToDataBase(ref connection))
-            {
-                MessageBox.Show("I can't connect to database");
-            }
-
 
         }
 
-        
+        private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

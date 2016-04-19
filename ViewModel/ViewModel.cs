@@ -1,46 +1,36 @@
-﻿using Model.Entity;
+﻿using QueuSystems.Model;
+using SQLite.Net.Interop;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Model.Database
+namespace QueuSystems.ViewModel
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        public ViewModel() {
 
-        }
-
-        #region Filds
-
-        private User currentUser;
-        private Connection currentConnection;
-
-        #endregion
-
-        #region Properties
-
-        public User CurrentUser
+        public ViewModel(ISQLitePlatform litePlatform, string databasePath, bool fileExists)
         {
-            get { return currentUser; }
-            set { currentUser = value; NotifyPropertyChanged(); }
+            if (fileExists)
+            {
+
+                HelperDatabase.ConnectionToDataBase(ref connection, litePlatform, databasePath);
+            }
+            else
+            {
+                HelperDatabase.CreateDataBase(ref connection, litePlatform, databasePath);
+            }
         }
 
+        private Connection connection;
 
-        public Connection CurrentConnection
+        public Connection Connection
         {
-            get { return currentConnection; }
-            set { currentConnection = value; }
+            get { return connection; }
+            set { connection = value; }
         }
-
-        #endregion
-
-
-
-
 
         #region Notify
 
@@ -62,6 +52,5 @@ namespace Model.Database
         }
 
         #endregion
-
     }
 }
